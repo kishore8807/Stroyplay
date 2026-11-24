@@ -60,24 +60,4 @@ src/
     └── Icons.jsx
 ```
 
-## Notes
 
-- This is the homepage UI only — no backend, database, authentication, payments, or admin panel
-- Poster and backdrop art uses **Lorem Picsum** (Unsplash-licensed photos), so the demo needs no paid API and no copyrighted film assets
-- Watchlist persists to browser `localStorage` — data survives page refreshes
-- Designed to work with the `opencode-token-optimizer` plugin for reduced token consumption
-
-## Token Optimizer
-
-This project uses the [opencode-token-optimizer](https://github.com/opencode-ai/opencode-token-optimizer) plugin (v0.1.0). It automatically routes trivial prompts to fast models and reduces token waste across the workflow.
-
-At startup you'll see:
-
-```
-[token-optimizer] Loaded 3 categories from oh-my-openagent.json
-[token-optimizer] Injected quick routing rules (maxPromptChars=100, 4 patterns)
-```
-
-## License
-
-MIT
