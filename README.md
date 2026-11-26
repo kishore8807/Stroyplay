@@ -1,54 +1,69 @@
 # StoryPlay
 
-A streaming-site demo: **React + Vite** front end and an **Express** API.
-The API serves a built-in offline catalogue (41 titles, all artwork included) or, if you add TMDB credentials, live TMDB data.
+A cinematic streaming homepage built with React and Vite, paired with an Express API for an offline catalogue or optional live TMDB data.
 
-## Quick start
+## Features
+
+- Fixed glass navbar, cinematic hero, and seven title carousels
+- Search, language filtering, watchlist in local storage, and title details
+- Responsive layout, reduced-motion support, keyboard focus, and semantic landmarks
+- Express API with offline catalogue; optional TMDB integration
+
+## Tech Stack
+
+- React 19 and Vite 8
+- Express API with CORS and compression
+- oxlint
+
+## Getting Started
+
+Requires Node.js 18 or newer.
 
 ```bash
-npm run install:all     # installs root, client and server dependencies
-npm run dev             # API on :4000, web app on http://localhost:5173
+npm run install:all
+npm run dev
 ```
+
+Open the Vite URL printed in the terminal (typically http://localhost:5173). The API runs at http://localhost:4000 and is available through the Vite `/api` proxy.
 
 ## Production
 
 ```bash
-npm run build           # builds client/dist
-npm start               # one server on :4000 serves the API and the built site
+npm run build
+npm start
 ```
 
-## Live TMDB data (optional)
+The production server runs at http://localhost:4000 and serves the built homepage and API.
 
-```bash
-cp server/.env.example server/.env   # then fill in ONE of TMDB_API_KEY or TMDB_READ_TOKEN
-```
+## Available Scripts
 
-Without credentials the server logs `source: offline catalogue`. With them it logs `source: TMDB`.
-Title ids look like `movie-123` / `tv-456` in TMDB mode and like `kaalam` in offline mode.
+| Script | Description |
+|---|---|
+| `npm run install:all` | Install root, server, and legacy client dependencies |
+| `npm run dev` | Start the API and Vite development server |
+| `npm run build` | Build the homepage into `dist/` |
+| `npm start` | Start the API and serve `dist/` |
+| `npm test` | Run the API tests |
+| `npm run lint` | Run oxlint |
 
-## Layout
+## Live TMDB Data (Optional)
 
-```
-client/   React app (src/pages, components, context, hooks, lib) + public/ (images, sample video)
-server/   Express API (src/app.js, providers/local.js, providers/tmdb.js) + data/catalog.js + tests
-```
+To use live TMDB data, set either `TMDB_API_KEY` or `TMDB_READ_TOKEN` in `server/.env`. Without credentials the API uses its offline catalogue.
 
 ## API
 
 | Route | Purpose |
 |---|---|
-| `GET /api/health` | status and active data source |
-| `GET /api/home` | hero titles and rows (`?refresh=true` bypasses cache) |
-| `GET /api/movies`, `/api/series` | `language`, `genre`, `sort` (featured, rating, newest, az), `page` |
-| `GET /api/title/:id` | full details, cast, trailer, similar and recommended |
-| `GET /api/search` | `q`, `type` (all, movie, tv, person), `language`, `genre` |
+| `GET /api/health` | API status and active data source |
+| `GET /api/home` | Hero titles and catalogue rows |
+| `GET /api/movies`, `/api/series` | Searchable and filterable catalogues |
+| `GET /api/title/:id` | Details, cast, trailer, similar and recommended titles |
+| `GET /api/search` | Search titles and people |
 
-## Tests
+## Project Structure
 
-`npm test` runs the API tests (offline provider, route behaviour, TMDB mapping, caching and error handling with a mocked fetch).
-
-## Notes
-
-- Watchlist and "Continue Watching" are stored in `localStorage`; there are no accounts.
-- "Watch Now" plays a short licensed sample clip (Big Buck Bunny, CC BY 3.0), not full titles.
-- TMDB mode was tested with mocked responses only; check it once with your real key.
+```
+src/       React + Vite homepage
+server/    Express API, offline catalogue, TMDB provider, and API tests
+client/    Previous React client retained in the repository
+```

@@ -10,7 +10,7 @@ import { parseCatalogQuery, parseSearchQuery } from './lib/params.js';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const wrap = (fn) => (req, res, next) => fn(req, res).then((data) => res.json(data)).catch(next);
 
-export function createApp(provider, { staticDir = path.resolve(here, '../../client/dist') } = {}) {
+export function createApp(provider, { staticDir = path.resolve(here, '../../dist') } = {}) {
   const app = express();
   app.disable('x-powered-by');
   app.use(cors());
